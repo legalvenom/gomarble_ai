@@ -178,17 +178,16 @@ LLM (Ollama's Mistral Model for Dynamic CSS Identification)
 
 ### Workflow Explanation
 1. **Frontend Interaction:**
-   - Users input a URL and the maximum number of pages to scrape.
+   - Users input a URL to scrape.
    - The frontend sends an API request to the backend with these parameters.
 
 2. **Backend Processing:**
    - The backend uses Selenium to navigate the website and extract the HTML content.
    - The extracted HTML is sent to the LLM for dynamic CSS selector identification.
-   - If the LLM fails, default selectors are used.
    - Reviews are parsed using the identified selectors, and pagination is handled to scrape multiple pages.
 
 3. **Data Return:**
-   - The backend returns the processed reviews, total pages scraped, and average rating to the frontend.
+   - The backend returns the processed reviews to the frontend.
    - The frontend displays the results in a user-friendly format.
 
 ---
@@ -199,7 +198,6 @@ LLM (Ollama's Mistral Model for Dynamic CSS Identification)
   - Titles
   - Ratings
   - Reviewers
-  - Dates
 - This eliminates the need for hardcoded selectors, making the scraper adaptable to various website structures.
 
 ---
