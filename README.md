@@ -138,21 +138,19 @@ curl -X GET "https://llm-review-scraper-backend.onrender.com/api/reviews?url=${e
 **Sample Response:**
 ```json
 {
-    "pages_processed": 3,
+    "pages_processed": 1,
     "reviews": [
         {
             "title": "Great product!",
             "body": "This product exceeded my expectations.",
             "rating": 5,
             "reviewer": "John Doe",
-            "date": "2023-12-01"
         },
         {
             "title": "Not bad",
             "body": "Good value for money.",
             "rating": 4,
             "reviewer": "Jane Smith",
-            "date": "2023-11-28"
         }
     ]
 }
