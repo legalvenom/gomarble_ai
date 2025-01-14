@@ -280,7 +280,7 @@ async def get_reviews(url: HttpUrl, max_pages: int = 5):
                 logger.error(f"Error closing browser: {str(e)}")
 
 def get_default_selectors() -> ReviewSelectors:
-    """Fallback selectors if LLM fails."""
+    
     return ReviewSelectors(
         container="div[class*='review'], div[class*='comment']",
         title="h3, h4, strong",
