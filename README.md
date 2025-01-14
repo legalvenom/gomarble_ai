@@ -48,6 +48,7 @@ The frontend is deployed using **Render**:
 3. Render will automatically deploy the frontend and provide a URL.
 
 **Access the frontend at**: [GoMarble Frontend](https://llm-review-scraper-frontend.onrender.com)
+
 ---
 
 ## Backend
