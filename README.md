@@ -29,8 +29,6 @@ gomarble/
 
 ## Features
 - Scrapes reviews from specified URLs.
-- Displays pages processed and calculates average ratings.
-- Allows users to specify the number of pages to scrape.
 - Fully responsive frontend with a clean UI.
 
 ---
