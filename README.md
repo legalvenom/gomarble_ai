@@ -7,6 +7,7 @@ Review Extractor a web-based application that allows users to scrape reviews fro
 - **Backend**: Deployed using Render in Web Service
 
 **URL**: [GoMarble](https://llm-review-scraper-frontend.onrender.com)
+
 **NOTE**: Since im using free deployment instance in Render it may go down when inactive
 
 
