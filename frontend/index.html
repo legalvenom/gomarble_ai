@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LLM Review Scraper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input[type="url"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #ccc;
+        }
+        .loading {
+            text-align: center;
+            margin: 20px 0;
+            display: none;
+        }
+        .error {
+            color: #dc3545;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f8d7da;
+            border-radius: 4px;
+            display: none;
+        }
+        .review {
+            background-color: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LLM Review Scraper</h1>
+        
+        <div class="input-group">
+            <input type="url" id="urlInput" placeholder="Enter URL of the page with reviews">
+            <button onclick="scrapeReviews()" id="scrapeButton">Scrape Reviews</button>
+        </div>
+        
+        <div id="loading" class="loading">Analyzing page and extracting reviews...</div>
+        <div id="error" class="error"></div>
+        
+        <div id="reviews"></div>
+    </div>
+
+    <script>
+        // Define the API URL - make sure this matches your FastAPI server address
+        const API_URL = 'http://localhost:8000';
+
+        async function scrapeReviews() {
+            const url = document.getElementById('urlInput').value;
+            const button = document.getElementById('scrapeButton');
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+            const reviews = document.getElementById('reviews');
+            
+            if (!url) {
+                error.textContent = 'Please enter a URL';
+                error.style.display = 'block';
+                return;
+            }
+            
+            // Reset UI
+            error.style.display = 'none';
+            reviews.innerHTML = '';
+            button.disabled = true;
+            loading.style.display = 'block';
+            
+            try {
+                const response = await fetch(`${API_URL}/api/reviews?url=${encodeURIComponent(url)}`);
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || 'Failed to fetch reviews');
+                }
+                
+                const data = await response.json();
+                
+                // Display reviews
+                data.reviews.forEach(review => {
+                    const reviewElement = document.createElement('div');
+                    reviewElement.className = 'review';
+                    reviewElement.innerHTML = `
+                        <h3>${review.title}</h3>
+                        <div>Rating: ${'★'.repeat(review.rating)}${'☆'.repeat(5-review.rating)}</div>
+                        <p>${review.body}</p>
+                        <div>By ${review.reviewer} ${review.date ? `on ${review.date}` : ''}</div>
+                    `;
+                    reviews.appendChild(reviewElement);
+                });
+                
+            } catch (err) {
+                error.textContent = err.message;
+                error.style.display = 'block';
+            } finally {
+                button.disabled = false;
+                loading.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
