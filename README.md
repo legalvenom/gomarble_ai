@@ -206,7 +206,11 @@ LLM (Ollama's Mistral Model for Dynamic CSS Identification)
 
 ## Sample Output Screenshot
 **Example Response Display:**
-![gomarble](https://github.com/user-attachments/assets/99369ec9-48a7-4f9c-bb06-91edfbebe611)
+![go1](https://github.com/user-attachments/assets/d2328eb8-72b8-400a-89f6-8c30138a75f2)
+
+![go2](https://github.com/user-attachments/assets/42a0969b-c388-4c00-91b3-ce86ebf4bf8c)
+
+
 
 ---
 
